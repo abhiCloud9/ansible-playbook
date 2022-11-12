@@ -1,0 +1,80 @@
+--- #### Starting line of the file
+- hosts: remote_machine_one
+  become_method: sudo
+  become: true
+  name: play1
+  tasks:
+      -name: Execute command "Date"
+        command: date
+       -name: Execute script on the remote remote_machine_one
+        script: test_script.sh
+       -name: Install git
+        yum: name:git state:latest
+       -name: Install apache server
+        yum: name=httpd state=latest
+
+- hosts: remote_machine_two
+  become_method: sudo
+  become: true
+  name: play2
+  tasks:
+     -name: Execute script on the remote remote_machine_two
+      script: test_script.sh
+     -name: Install nginx
+      yum: name:nginx state:latest
+     -name: Install mysql
+      yum: name=mysql state=latest
+
+
+
+---
+- name: executing tasks
+  hosts: Slave1
+  tasks:
+  - name: task1
+    apt: name=mysql state=latest
+
+--------------
+#Correct format
+--- #### Starting line of the file
+- hosts: remote_machine_one
+  become_method: sudo
+  become: true
+  name: play1
+  tasks:
+  - name: Execute command "Date"
+    command: date
+  - name: Execute script on the remote remote_machine_one
+    script: test_script.sh
+  - name: Install git
+    yum: name=git state=latest
+  - name: Install apache server
+    yum: name=httpd state=latest
+
+- hosts: remote_machine_two
+  become_method: sudo
+  become: true
+  name: play2
+  tasks:
+  - name: Execute script on the remote remote_machine_two
+    script: test_script.sh
+  - name: Install nginx
+    yum: name=nginx state=latest
+  - name: Install mysql
+
+
+
+  ######################################
+--- #### Starting line of the file
+- name: tasks for assign1 on w1
+  hosts: worker1
+  become: true
+  tasks:
+  - name: installing java
+    apt: name=openjdk-11-jdk update-cache=yes state=latest
+- name: tasks for assign2 on w2
+  hosts: worker2
+  become: true
+  tasks:
+  - name: installing mysql
+    apt: name=mysql-server update-cache=yes state=latest
