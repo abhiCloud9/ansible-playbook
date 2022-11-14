@@ -78,3 +78,20 @@
   tasks:
   - name: installing mysql
     apt: name=mysql-server update-cache=yes state=latest
+    
+    
+    #################################
+    --- #### Starting line of the file
+- name: tasks for assign3 on w1
+  hosts: worker1
+  become: true
+  tasks:
+  - name: apavhe2 install on w1
+    apt: name=apache2 update_cache=yes state=latest
+- name: tasks for assign3 on w2
+  hosts: worker2
+  become: true
+  tasks:
+  - name: nginx server install on w2
+    apt: name=nginx update_cache=yes state=latest
+
