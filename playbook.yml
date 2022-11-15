@@ -94,4 +94,26 @@
   tasks:
   - name: nginx server install on w2
     apt: name=nginx update_cache=yes state=latest
+    
+    
+    ##########################################
+    
+    --- #### Starting line of the file
+- name: tasks for assign4 on w1
+  hosts: worker1
+  become: true
+  tasks:
+  - name: apache2 install w1
+    apt: name=apache2 update_cache=yes state=latest
+  - name: copy the index.html from the home dir = /home/ubuntu/assign4.1/index.html
+    copy: src=/home/ubuntu/assign4.1/index.html dest=/var/www/html/index.html
+- name: tasks for assign4 on w2
+  hosts: worker2
+  become: true
+  tasks:
+  - name: nginx server install on w2
+    apt: name=nginx update_cache=yes state=latest
+  - name: copy the index.html from the home dir = /home/ubuntu/assign4.1/nginx/index.html
+    copy: src=/home/ubuntu/assign4.1/nginx/index.html dest=/var/www/html/index.html
+
 
